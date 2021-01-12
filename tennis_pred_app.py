@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -40,7 +41,7 @@ def main():
         "Entry", options=["R", "PR", "LL", "WC", "Q", "S", "SE"], key=2
     )
     p1_rank_str = col1.text_input("Rank", value=0, key=3)
-    p1_rank_pts_str = col1.text_input("Rank Points", value=0, key=4)
+    # p1_rank_pts_str = col1.text_input("Rank Points", value=0, key=4)
     p1_age_str = col1.text_input("Age", value=0, key=5)
     p2_name = col2.multiselect("Name", options=list(player_id.keys()), key=6)
     p2_seed_str = col2.text_input("Seed", value=0, key=7)
@@ -48,7 +49,7 @@ def main():
         "Entry", options=["R", "PR", "LL", "WC", "Q", "S", "SE"], key=8
     )
     p2_rank_str = col2.text_input("Rank", value=0, key=9)
-    p2_rank_pts_str = col2.text_input("Rank Points", value=0, key=10)
+    # p2_rank_pts_str = col2.text_input("Rank Points", value=0, key=10)
     p2_age_str = col2.text_input("Age", value=0, key=11)
 
     if st.button("Predict"):
@@ -62,8 +63,8 @@ def main():
         p2_seed = 0 if p2_seed_str == "N/A" else int(p2_seed_str)
         p1_rank = int(p1_rank_str)
         p2_rank = int(p2_rank_str)
-        p1_rank_pts = int(p1_rank_pts_str)
-        p2_rank_pts = int(p2_rank_pts_str)
+        # p1_rank_pts = int(p1_rank_pts_str)
+        # p2_rank_pts = int(p2_rank_pts_str)
         p1_age = int(p1_age_str)
         p2_age = int(p2_age_str)
         data1 = [
@@ -132,6 +133,12 @@ def main():
         st.write("Predicted winner is: {} ({}%)".format(winner, probability * 100))
 
     st.line_chart({"Average Age": avg_ages})
+
+    plt.plot(years, avg_ages)
+    plt.title("Average Age of Tournament Winners Over the Years")
+    plt.ylabel("Average Age of Tournament Winners Over the Year")
+    plt.xlabel("Year")
+    st.pyplot(plt.gcf())
 
 
 def winner_age():

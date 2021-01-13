@@ -1,0 +1,1 @@
+wed: sh setup.sh && streamlit run tennis_pred_app.py
